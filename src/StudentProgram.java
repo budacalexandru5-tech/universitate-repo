@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class StudentProgram {
@@ -13,8 +15,24 @@ public class StudentProgram {
 
         for(int i = 0; i < nrStudenti; i++){
             Student student = new Student();
-            System.out.println("Introducere facultate (Matematica / Informatica): ");
-            student.faculty = input.next();
+
+            do {
+                System.out.println("Introduceti facultatea (Matematica sau Informatica):");
+                student.faculty = input.next().toUpperCase(Locale.ROOT).trim();
+
+                switch (student.faculty) {
+                    case "MATEMATICA":
+                        System.out.println("Ati introdus un student in facultatea Matematica!");
+                        break;
+                    case "INFORMATICA":
+                        System.out.println("Ati introdus un student in facultatea Informatica!");
+                        break;
+                    default:
+                        System.out.println("Introduceti doar Matematica sau Informatica!");
+                        break;
+                }
+            } while (!student.faculty.equals("MATEMATICA") && !student.faculty.equals("INFORMATICA"));
+
 
 
             System.out.println("Introducere nume grupa: ");
@@ -25,12 +43,36 @@ public class StudentProgram {
             student.numeStudent = input.next();
 
 
-            System.out.println("Introducere an nastere student: ");
-            student.anulNasterii = input.nextShort();
+
+            do {
+                System.out.println("Introducere an nastere student: ");
+                student.anulNasterii = input.nextShort();
+                if(student.anulNasterii > 2026 || student.anulNasterii <= 0) System.out.println("Invalid! Introdu alt numar!");
+                else break;
+            } while (student.anulNasterii > 2026 || student.anulNasterii <= 0);
 
 
-            System.out.println("Introducere specialitate: ");
-            student.specialitate = input.next();
+
+
+            do {
+                System.out.println("Introducere specialitate: ");
+                student.specialitate = input.next().toUpperCase(Locale.ROOT).trim();
+
+                switch (student.specialitate) {
+                    case "ALGEBRA":
+                        System.out.println("Ati introdus un student in specialitatea Algebra!");
+                        break;
+                    case "GEOMETRIE":
+                        System.out.println("Ati introdus un student in facultatea Geometrie!");
+                        break;
+                    case "CALCULINTEGRAL":
+                        System.out.println("Ati introdus un student in facultatea Calcul Integral!");
+                        break;
+                    default:
+                        System.out.println("Introduceti doar Algebra/Geometrie/CalculIntegral!");
+                        break;
+                }
+            } while (!student.specialitate.equals("ALGEBRA") && !student.specialitate.equals("GEOMETRIE")&& !student.specialitate.equals("CALCULINTEGRAL"));
 
 
             System.out.println("Introduceti rezultatele de la testul1, testul2 si examen: ");
